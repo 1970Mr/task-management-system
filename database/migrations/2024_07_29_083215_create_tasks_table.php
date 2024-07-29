@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('priority', ['high', 'medium', 'low'])->default('medium');
             $table->timestamp('deadline')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('parent_task_id')->nullable()->constrained('tasks')->onDelete('set null');
+            $table->foreignId('parent_task_id')->nullable()->constrained('tasks')->onDelete('cascade');
             $table->timestamps();
         });
     }
