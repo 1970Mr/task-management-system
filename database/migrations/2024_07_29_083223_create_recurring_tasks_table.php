@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recurring_tasks', function (Blueprint $table) {
+        Schema::create('recurring_tasks', static function (Blueprint $table) {
             $table->id();
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
+            $table->string('recurrence_rule');
             $table->timestamps();
         });
     }

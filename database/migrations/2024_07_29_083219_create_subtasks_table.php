@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subtasks', function (Blueprint $table) {
+        Schema::create('subtasks', static function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

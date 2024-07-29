@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('tasks', static function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->enum('priority', ['high', 'medium', 'low'])->default('medium');
+            $table->timestamp('deadline')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('parent_task_id')->nullable()->constrained('tasks')->onDelete('set null');
             $table->timestamps();
         });
     }
