@@ -25,7 +25,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'name' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users,email,' . Auth::id(),
-            'password' => 'sometimes|string|min:8',
+            'password' => 'sometimes|string|min:8|confirmed',
         ];
     }
 }
