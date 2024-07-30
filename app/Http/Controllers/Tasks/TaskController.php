@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Tasks;
 
+use App\Events\TaskCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tasks\TaskStoreRequest;
 use App\Http\Requests\Tasks\TaskUpdateRequest;
@@ -21,6 +22,7 @@ class TaskController extends Controller
     public function store(TaskStoreRequest $request): JsonResponse
     {
         $task = Auth::user()->tasks()->create($request->validated());
+        event(new TaskCreated($task));
         return Response::json($task, 201);
     }
 
