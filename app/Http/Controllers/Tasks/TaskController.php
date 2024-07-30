@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Tasks;
 
 use App\Events\TaskCreated;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tasks\AssignUsersRequest;
 use App\Http\Requests\Tasks\TaskStoreRequest;
 use App\Http\Requests\Tasks\TaskUpdateRequest;
 use App\Models\Task;
