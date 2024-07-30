@@ -32,6 +32,8 @@ class TaskStoreRequest extends FormRequest
             'status' => 'required|in:' . $statuses,
             'deadline' => 'nullable|date',
             'parent_task_id' => 'nullable|exists:tasks,id',
+            'user_ids' => 'required|array',
+            'user_ids.*' => 'exists:users,id',
         ];
     }
 }

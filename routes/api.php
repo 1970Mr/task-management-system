@@ -25,6 +25,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tasks', [TaskController::class, 'userTasks']);
     Route::middleware(IsAdmin::class)->prefix('admin/')->group(function () {
         Route::apiResource('tasks', TaskController::class);
-        Route::post('tasks/{task}/assign-users', [TaskController::class, 'assignUsersToTask']);
     });
 });

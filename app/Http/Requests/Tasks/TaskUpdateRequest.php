@@ -32,6 +32,8 @@ class TaskUpdateRequest extends FormRequest
             'status' => 'sometimes|in:' . $statuses,
             'deadline' => 'nullable|date',
             'parent_task_id' => 'nullable|exists:tasks,id',
+            'user_ids' => 'sometimes|array',
+            'user_ids.*' => 'required_with::user_ids|exists:users,id',
         ];
     }
 }

@@ -23,6 +23,7 @@ class TaskController extends Controller
     public function store(TaskStoreRequest $request): JsonResponse
     {
         $task = Auth::user()->tasks()->create($request->validated());
+        $this->assignUsersToTask($task, $request->user_ids);
         event(new TaskCreated($task));
         return Response::json($task, 201);
     }
@@ -30,6 +31,7 @@ class TaskController extends Controller
     public function update(TaskUpdateRequest $request, Task $task): JsonResponse
     {
         $task->update($request->all());
+        $this->assignUsersToTask($task, $request->user_ids);
         return Response::json($task);
     }
 
@@ -46,12 +48,10 @@ class TaskController extends Controller
         return Response::json($tasks);
     }
 
-    public function assignUsersToTask(AssignUsersRequest $request, Task $task): JsonResponse
+    private function assignUsersToTask(Task $task, ?array $userIds = null): void
     {
-        $task->users()->sync($request->user_ids);
-        return Response::json([
-            'message' => 'Users assigned to task successfully',
-            'task' => $task->load('users')
-        ]);
+        if ($userIds) {
+            $task->users()->sync($userIds);
+        }
     }
 }
