@@ -6,6 +6,7 @@ use App\Enums\TaskPriority;
 use App\Enums\TaskStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model
@@ -44,8 +45,8 @@ class Task extends Model
         return $this->belongsTo(__CLASS__, 'parent_task_id');
     }
 
-    public function notifications(): HasMany
+    public function users(): BelongsToMany
     {
-        return $this->hasMany(Notification::class);
+        return $this->belongsToMany(User::class, 'task_user');
     }
 }

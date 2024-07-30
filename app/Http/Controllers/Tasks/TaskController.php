@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tasks;
 
 use App\Events\TaskCreated;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Tasks\AssignUsersRequest;
 use App\Http\Requests\Tasks\TaskStoreRequest;
 use App\Http\Requests\Tasks\TaskUpdateRequest;
 use App\Models\Task;
@@ -15,7 +16,7 @@ class TaskController extends Controller
 {
     public function index(): JsonResponse
     {
-        $tasks = Task::all();
+        $tasks = Task::with('users')->latest()->get();
         return Response::json($tasks);
     }
 
@@ -40,7 +41,17 @@ class TaskController extends Controller
 
     public function userTasks(): JsonResponse
     {
-        $tasks = Auth::user()->tasks()->get();
+        $user = Auth::user();
+        $tasks = $user->assignedTasks()->with('users')->latest()->get();
         return Response::json($tasks);
+    }
+
+    public function assignUsersToTask(AssignUsersRequest $request, Task $task): JsonResponse
+    {
+        $task->users()->sync($request->user_ids);
+        return Response::json([
+            'message' => 'Users assigned to task successfully',
+            'task' => $task->load('users')
+        ]);
     }
 }
