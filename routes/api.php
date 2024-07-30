@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Tasks\TaskController;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -17,4 +19,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Profile
     Route::get('/user', [ProfileController::class, 'userProfile']);
     Route::put('/user', [ProfileController::class, 'updateProfile']);
+
+    // Tasks
+    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::middleware(IsAdmin::class)->prefix('admin/')->group(function () {
+        Route::apiResource('tasks', TaskController::class)->except('index');
+    });
 });
