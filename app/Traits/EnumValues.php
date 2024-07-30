@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Enums;
+namespace App\Traits;
 
-enum UserRoles: string
+trait EnumValues
 {
-    case Admin = 'admin';
-    case Collaborator = 'collaborator';
-    case Viewer = 'viewer';
-
     public static function values(): array
     {
         return array_map(static fn ($item) => $item->value, self::cases());

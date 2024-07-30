@@ -21,8 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/user', [ProfileController::class, 'updateProfile']);
 
     // Tasks
-    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::get('/', [TaskController::class, 'userTasks']);
+    Route::get('/tasks', [TaskController::class, 'userTasks']);
     Route::middleware(IsAdmin::class)->prefix('admin/')->group(function () {
-        Route::apiResource('tasks', TaskController::class)->except('index');
+        Route::apiResource('tasks', TaskController::class);
     });
 });

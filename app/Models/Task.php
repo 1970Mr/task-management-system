@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\TaskPriority;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Task extends Model
 {
@@ -22,6 +22,7 @@ class Task extends Model
     {
         return [
             'deadline' => 'datetime',
+            'priority' => TaskPriority::class,
         ];
     }
 
@@ -32,7 +33,7 @@ class Task extends Model
 
     public function subtasks(): HasMany
     {
-        return $this->hasMany(Subtask::class);
+        return $this->hasMany(__CLASS__, 'parent_task_id');
     }
 
     public function parentTask(): BelongsTo
@@ -40,18 +41,8 @@ class Task extends Model
         return $this->belongsTo(__CLASS__, 'parent_task_id');
     }
 
-    public function dependencies(): HasMany
-    {
-        return $this->hasMany(TaskDependency::class);
-    }
-
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
-    }
-
-    public function recurringTask(): HasOne
-    {
-        return $this->hasOne(RecurringTask::class);
     }
 }

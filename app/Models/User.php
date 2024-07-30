@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\UserRoles;
+use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,7 +45,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'role' => UserRoles::class,
+            'role' => UserRole::class,
         ];
     }
 
@@ -56,6 +56,6 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role === UserRoles::Admin;
+        return $this->role === UserRole::Admin;
     }
 }

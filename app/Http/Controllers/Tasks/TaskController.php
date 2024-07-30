@@ -14,7 +14,7 @@ class TaskController extends Controller
 {
     public function index(): JsonResponse
     {
-        $tasks = Auth::user()->tasks()->get();
+        $tasks = Task::all();
         return Response::json($tasks);
     }
 
@@ -34,5 +34,11 @@ class TaskController extends Controller
     {
         $task->delete();
         return Response::json(['message' => 'Task deleted successfully']);
+    }
+
+    public function userTasks(): JsonResponse
+    {
+        $tasks = Auth::user()->tasks()->get();
+        return Response::json($tasks);
     }
 }
