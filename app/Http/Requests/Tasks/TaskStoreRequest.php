@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Tasks;
 
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TaskStoreRequest extends FormRequest
@@ -21,10 +23,13 @@ class TaskStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $priorities = implode(',', TaskPriority::values());
+        $statuses = implode(',', TaskStatus::values());
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'priority' => 'required|in:high,medium,low',
+            'priority' => 'required|in:' . $priorities,
+            'status' => 'required|in:' . $statuses,
             'deadline' => 'nullable|date',
             'parent_task_id' => 'nullable|exists:tasks,id',
         ];
