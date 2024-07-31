@@ -16,7 +16,7 @@ class LoginController extends Controller
     {
         try {
             $this->authenticate($request);
-            $user = User::query()->where('email', $request['email'])->firstOrFail();
+            $user = User::query()->where('email', $request->email)->firstOrFail();
             $token = $user->createToken('auth_token')->plainTextToken;
             return Response::json(['access_token' => $token, 'token_type' => 'Bearer'], 200);
         } catch (AuthenticationException $e) {
