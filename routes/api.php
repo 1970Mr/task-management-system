@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Tasks\TaskController;
 use App\Http\Controllers\Tasks\TaskReportController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/tasks/export/excel', [TaskReportController::class, 'exportTasksToExcel']);
         Route::get('/tasks/export/pdf', [TaskReportController::class, 'exportTasksToPdf']);
         Route::post('/tasks/send-report', [TaskReportController::class, 'sendTaskReport']);
+
+        // Users
+        Route::get('/users', UserController::class);
     });
 });
