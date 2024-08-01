@@ -32,6 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/tasks/send-report', [TaskReportController::class, 'sendTaskReport']);
 
         // Users
-        Route::get('/users', UserController::class);
+        Route::get('/users', UserController::class)->name('users.index');
     });
 });
