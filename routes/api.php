@@ -16,11 +16,11 @@ Route::post('/login', LoginController::class)->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
     // Auth
-    Route::post('/logout', LogoutController::class);
+    Route::post('/logout', LogoutController::class)->name('logout');
 
     // Profile
-    Route::get('/user', [ProfileController::class, 'userProfile']);
-    Route::put('/user', [ProfileController::class, 'updateProfile']);
+    Route::get('/user', [ProfileController::class, 'userProfile'])->name('user-profile');
+    Route::put('/user', [ProfileController::class, 'updateProfile'])->name('update-profile');
 
     // Tasks
     Route::get('/', [TaskController::class, 'userTasks']);

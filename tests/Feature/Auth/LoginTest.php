@@ -13,7 +13,7 @@ class LoginTest extends TestCase
     public function test_login_successful(): void
     {
         $user = User::factory()->create([
-            'password' => bcrypt($password = 'password')
+            'password' => $password = 'password'
         ]);
 
         $response = $this->postJson(route('login'), [
@@ -22,10 +22,7 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-            ->assertJsonStructure([
-                'access_token',
-                'token_type',
-            ]);
+            ->assertJsonStructure(['access_token', 'token_type',]);
     }
 
     public function test_login_failed(): void
@@ -36,8 +33,6 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertStatus(401)
-            ->assertJson([
-                'message' => 'Invalid login details'
-            ]);
+            ->assertJson(['message' => 'Invalid login details']);
     }
 }
