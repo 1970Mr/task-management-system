@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->enum('status', TaskStatus::values())->default(TaskStatus::Active);
             $table->enum('priority', TaskPriority::values())->default(TaskPriority::Medium);
-            $table->timestamp('deadline')->nullable();
+            $table->timestamp('deadline');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('parent_task_id')->nullable()->constrained('tasks')->onDelete('cascade');
             $table->timestamps();

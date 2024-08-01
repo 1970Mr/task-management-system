@@ -30,7 +30,7 @@ class TaskUpdateRequest extends FormRequest
             'description' => 'nullable|string',
             'priority' => 'sometimes|in:' . $priorities,
             'status' => 'sometimes|in:' . $statuses,
-            'deadline' => 'nullable|date',
+            'deadline' => 'sometimes|date',
             'parent_task_id' => 'nullable|exists:tasks,id',
             'user_ids' => 'sometimes|array',
             'user_ids.*' => 'required_with::user_ids|exists:users,id',

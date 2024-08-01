@@ -23,10 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/user', [ProfileController::class, 'updateProfile'])->name('update-profile');
 
     // Tasks
-    Route::get('/', [TaskController::class, 'userTasks']);
-    Route::get('/tasks', [TaskController::class, 'userTasks']);
+    Route::get('/', [TaskController::class, 'userTasks'])->name('home');
+    Route::get('/tasks', [TaskController::class, 'userTasks'])->name('user-tasks');
     Route::middleware(IsAdmin::class)->prefix('admin/')->group(function () {
-        Route::apiResource('tasks', TaskController::class);
+        Route::apiResource('tasks', TaskController::class)->except('show');
         Route::get('/tasks/export/excel', [TaskReportController::class, 'exportTasksToExcel']);
         Route::get('/tasks/export/pdf', [TaskReportController::class, 'exportTasksToPdf']);
         Route::post('/tasks/send-report', [TaskReportController::class, 'sendTaskReport']);

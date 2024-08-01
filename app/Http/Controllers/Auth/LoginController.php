@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function __invoke(LoginRequest $request): JsonResponse
     {
         try {
-            $this->authenticate($request);
+            $this->checkAuth($request);
             $user = User::query()->where('email', $request->email)->firstOrFail();
             $token = $user->createToken('auth_token')->plainTextToken;
             return Response::json(['access_token' => $token, 'token_type' => 'Bearer'], 200);
@@ -27,7 +27,7 @@ class LoginController extends Controller
     /**
      * @throws AuthenticationException
      */
-    private function authenticate(LoginRequest $request): void
+    private function checkAuth(LoginRequest $request): void
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
             throw new AuthenticationException('Invalid login details');

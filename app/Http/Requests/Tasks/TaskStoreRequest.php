@@ -30,7 +30,7 @@ class TaskStoreRequest extends FormRequest
             'description' => 'nullable|string',
             'priority' => 'required|in:' . $priorities,
             'status' => 'required|in:' . $statuses,
-            'deadline' => 'nullable|date',
+            'deadline' => 'required|date',
             'parent_task_id' => 'nullable|exists:tasks,id',
             'user_ids' => 'required|array',
             'user_ids.*' => 'exists:users,id',
