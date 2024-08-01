@@ -5,10 +5,7 @@ namespace App\Jobs;
 use App\Mail\TaskCreated;
 use App\Models\Task;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
 class SendTaskCreatedJob implements ShouldQueue

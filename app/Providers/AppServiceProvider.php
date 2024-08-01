@@ -24,10 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Event::listen(TaskCreated::class, [
-            SendTaskCreatedNotification::class,
-            SendTaskDeadlineWarning::class,
-            MarkTaskAsInactive::class,
-        ]);
+        Event::listen(TaskCreated::class, SendTaskCreatedNotification::class);
+        Event::listen(TaskCreated::class, SendTaskDeadlineWarning::class);
+        Event::listen(TaskCreated::class, MarkTaskAsInactive::class);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\TaskCreated;
 use App\Jobs\MarkTaskAsInactiveJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,7 +21,7 @@ class MarkTaskAsInactive implements ShouldQueue
     /**
      * Handle the event.
      */
-    public function handle(TaskCreated $event): void
+    public function handle(object $event): void
     {
         $task = $event->task;
         $deadlineTime = $task->deadline;
