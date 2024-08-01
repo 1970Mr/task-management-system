@@ -72,6 +72,18 @@ A backend API for a task management system built with Laravel. This API allows u
 4. **Admin functionalities**:
     - Admin users can manage all tasks and users via the API.
 
+## API Documentation
+
+### Postman Collection
+
+Import the Postman collection to test the API endpoints:
+
+1. Open Postman.
+2. Click `Import` and select `Upload Files`.
+3. Navigate to `docs/Task Management System.postman_collection.json` and open it.
+
+You will now see the `Task Management System` collection in your Postman sidebar. You can now explore and test the various endpoints provided by the API.
+
 ## Frontend
 
 For the frontend of this project, please refer to the [Task Management System UI](https://github.com/1970Mr/task-management-system-ui) repository.
