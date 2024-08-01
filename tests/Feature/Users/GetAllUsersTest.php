@@ -16,7 +16,7 @@ class GetAllUsersTest extends TestCase
     public function test_get_all_users(): void
     {
         $user = User::factory()->create(['role' => UserRole::Admin]);
-        User::factory()->count(10)->create();
+        User::factory()->count(3)->create();
         Sanctum::actingAs($user, ['*']);
 
         $response = $this->getJson(route('tasks.index'));

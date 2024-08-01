@@ -27,9 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/tasks', [TaskController::class, 'userTasks'])->name('user-tasks');
     Route::middleware(IsAdmin::class)->prefix('admin/')->group(function () {
         Route::apiResource('tasks', TaskController::class)->except('show');
-        Route::get('/tasks/export/excel', [TaskReportController::class, 'exportTasksToExcel']);
-        Route::get('/tasks/export/pdf', [TaskReportController::class, 'exportTasksToPdf']);
-        Route::post('/tasks/send-report', [TaskReportController::class, 'sendTaskReport']);
+        Route::get('/tasks/export/excel', [TaskReportController::class, 'exportTasksToExcel'])->name('tasks.export.excel');
+        Route::get('/tasks/export/pdf', [TaskReportController::class, 'exportTasksToPdf'])->name('tasks.export.pdf');
+        Route::post('/tasks/send-report', [TaskReportController::class, 'sendTaskReport'])->name('tasks.send-report');
 
         // Users
         Route::get('/users', UserController::class)->name('users.index');
