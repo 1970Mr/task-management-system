@@ -59,7 +59,7 @@ class UpdateTaskTest extends TestCase
             ->assertJsonValidationErrors(['title', 'priority', 'status', 'deadline']);
     }
 
-    public function test_create_task_authorization_error(): void
+    public function test_update_task_authorization_error(): void
     {
         $user = User::factory()->create();
         $adminUser = User::factory()->create(['role' => UserRole::Admin]);
